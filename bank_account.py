@@ -65,31 +65,53 @@ class Client(Person):
         self.balance += deposit_mount
         print('Deposit accepted')
     
-    def withdraw(self, withdraw_amount):
+    def retire(self, retire_amount):
         """
-        Withdraws a specified amount from the client's account if sufficient funds are available.
+        Retire a specified amount from the client's account if sufficient funds are available.
 
         Parameters:
-        - withdraw_amount (float): The amount to be withdrawn.
+        - retire_amount (float): The amount to be retirement.
 
         Prints:
-        - 'Withdrawal made' if the withdrawal is successful.
-        - 'Insufficient funds' if the account balance is less than the withdrawal amount.
+        - Retire made' if the retirement is successful.
+        - 'Insufficient funds' if the account balance is less than the retire amount.
         """
-        if self.balance >= withdraw_amount:
-            self.balance -= withdraw_amount
-            print('Withdrawal made')
+        if self.balance >= retire_amount:
+            self.balance -= retire_amount
+            print('Retire made')
         else:
             print('Insufficient funds')
 
-    def create_client():
-        """
-        Method to create a new Client object by taking user input for name,
-        last name, and account number.
+def create_client():
+    """
+    Method to create a new Client object by taking user input for name,
+    last name, and account number.
 
-        Returns:
-        Client: A new Client object with user-provided information.
-        """
-        name = input('Type your name: ')
-        last_name = input('Type your last name: ')
-        account_number = input('Type your number account')
+    Returns:
+    Client: A new Client object with user-provided information.
+    """
+    name = input('Type your name: ')
+    last_name = input('Type your last name: ')
+    account_number = input('Type your number account: ')
+    client = Client(name, last_name, account_number)
+    return client
+    
+def start():
+    my_client = create_client()
+    print(my_client)
+    option = 0
+
+    while option != 'E':
+        print('Choose: Deposit (D), Retire (R) or Exit (E)')
+        option = input()
+
+        if option == 'D':
+            amount_to_deposit = int(input('Mount to deposit: '))
+            my_client.deposit(amount_to_deposit)
+        elif option == 'R':
+            amount_to_retire = int(input('Amount to retire: '))
+            my_client.retire(amount_to_retire)
+        print(my_client)
+    print('Thanks for operating')
+
+start()
